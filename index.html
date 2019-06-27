@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+    <script src="https://unpkg.com/tone"></script>
+    <title>My Instrument</title>
+</head>
+<body>
+    <h1>My First HMTL page</h1>
+    <button id="C4">C4</button>
+    <button id="D4">D4</button>
+    <button id="E4">E4</button>
+    <button id="F4">F4</button>
+    <button id="G4">G4</button>
+    <button id="A4">A4</button>
+    <button id="B4">H4</button>
+    <button id="C5">C5</button>
+
+    <script>
+        //create a synth and connect it to the master output (your speakers)
+        var synth = new Tone.Synth().toMaster();
+
+        let buttons = document.getElementsByTagName("button");
+
+        for(let button of buttons){
+            button.addEventListener("click", function () {
+                synth.triggerAttackRelease(this.id, "8n");
+            })
+        }
+
+        let mapa = {
+            "a": "C4",
+            "s": "D4",
+            "d": "E4",
+            "f": "F4",
+            "g": "G4",
+            "h": "A4",
+            "j": "B4",
+            "k": "C5"
+        };
+
+        document.addEventListener("keypress", function (event) {
+            console.log(event.key);
+
+            synth.triggerAttackRelease(mapa[event.key], "8n");
+        })
+    </script>
+</body>
+</html>
